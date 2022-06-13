@@ -1,0 +1,13 @@
+DataModule.hpp:19:3:SolarGators::DataModules::DataModule::DataModule(uint32_t, uint16_t, uint32_t, uint16_t, bool, bool)	24	static
+DataModule.hpp:24:11:SolarGators::DataModules::DataModule::~DataModule()	16	static
+DataModule.hpp:24:11:virtual SolarGators::DataModules::DataModule::~DataModule()	16	static
+OrionBMS.cpp:12:3:SolarGators::DataModules::OrionBMS::OrionBMS(uint32_t)	32	static
+OrionBMS.cpp:16:3:SolarGators::DataModules::OrionBMS::~OrionBMS()	16	static
+OrionBMS.cpp:16:3:virtual SolarGators::DataModules::OrionBMS::~OrionBMS()	16	static
+OrionBMS.cpp:19:9:float SolarGators::DataModules::OrionBMS::GetLowCellVoltage()	16	static
+OrionBMS.cpp:23:9:float SolarGators::DataModules::OrionBMS::GetHighCellVoltage()	16	static
+OrionBMS.cpp:27:9:float SolarGators::DataModules::OrionBMS::GetAvgCellVoltage()	16	static
+OrionBMS.cpp:31:9:float SolarGators::DataModules::OrionBMS::GetPackVoltage()	16	static
+OrionBMS.cpp:35:9:float SolarGators::DataModules::OrionBMS::GetStateOfCharge()	16	static
+OrionBMS.cpp:40:8:virtual void SolarGators::DataModules::OrionBMS::ToByteArray(uint8_t*) const	32	static
+OrionBMS.cpp:57:8:virtual void SolarGators::DataModules::OrionBMS::FromByteArray(uint8_t*)	32	static

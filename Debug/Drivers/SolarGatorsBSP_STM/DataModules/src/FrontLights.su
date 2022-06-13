@@ -1,0 +1,8 @@
+DataModule.hpp:19:3:SolarGators::DataModules::DataModule::DataModule(uint32_t, uint16_t, uint32_t, uint16_t, bool, bool)	24	static
+DataModule.hpp:24:11:SolarGators::DataModules::DataModule::~DataModule()	16	static
+DataModule.hpp:24:11:virtual SolarGators::DataModules::DataModule::~DataModule()	16	static
+FrontLights.cpp:17:1:SolarGators::DataModules::FrontLights::FrontLights()	32	static
+FrontLights.cpp:24:1:SolarGators::DataModules::FrontLights::~FrontLights()	16	static
+FrontLights.cpp:24:1:virtual SolarGators::DataModules::FrontLights::~FrontLights()	16	static
+FrontLights.cpp:29:10:uint16_t SolarGators::DataModules::FrontLights::GetBreak() const	16	static
+FrontLights.cpp:34:10:uint16_t SolarGators::DataModules::FrontLights::GetThrottle() const	16	static
