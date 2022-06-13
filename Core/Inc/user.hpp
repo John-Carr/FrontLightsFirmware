@@ -9,7 +9,6 @@
 #include "CAN.hpp"
 #include "LED.hpp"
 #include "MPU6050.hpp"
-#include "ADCS747.hpp"
 
 SolarGators::DataModules::Steering LightsState;
 extern CAN_HandleTypeDef hcan;
@@ -28,11 +27,10 @@ LSM6DSR_Object_t imu;
 
 SolarGators::Drivers::fpoint_3d_t ACCEL;
 extern SPI_HandleTypeDef hspi1;
-// Break
-SolarGators::Drivers::ADCS747 throttle_adc(&hspi1, Break_CS_GPIO_Port, Break_CS_Pin);
+
 uint8_t BREAK_VAL;
 // Throttle
-SolarGators::Drivers::ADCS747 break_adc(&hspi1, Throttle_CS_GPIO_Port, Throttle_CS_Pin);
+// TODO
 uint8_t THROTTLE_VAL;
 
 // Leds

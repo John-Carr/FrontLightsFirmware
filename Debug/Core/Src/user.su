@@ -5,7 +5,7 @@ user.cpp:97:6:void UpdateSignals()	8	static
 user.cpp:127:6:void UpdateLights()	8	static
 user.cpp:141:6:void ReadIMU()	24	static
 user.cpp:147:6:void ReadADC()	8	static
-user.cpp:153:6:void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef*)	16	static
-user.cpp:157:1:void __static_initialization_and_destruction_0(int, int)	16	static
-user.cpp:157:1:cpp)	8	static
-user.cpp:157:1:cpp)	8	static
+user.cpp:152:6:void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef*)	16	static
+user.cpp:156:1:void __static_initialization_and_destruction_0(int, int)	16	static
+user.cpp:156:1:cpp)	8	static
+user.cpp:156:1:cpp)	8	static

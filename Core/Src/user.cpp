@@ -76,8 +76,8 @@ void CPP_UserSetup(void)
   {
       Error_Handler();
   }
-  break_adc.Init();
-  throttle_adc.Init();
+  // TODO: Initialize the ADC for throttle
+
   osTimerStart(adc_timer_id, 500);
   // Start Thread that sends CAN Data
   can_tx_timer_id = osTimerNew((osThreadFunc_t)SendCanMsgs, osTimerPeriodic, NULL, &can_tx_timer_attr);
@@ -146,8 +146,7 @@ void ReadIMU()
 
 void ReadADC()
 {
-  BREAK_VAL = break_adc.GetVoltage();
-  THROTTLE_VAL = throttle_adc.GetVoltage();
+  // TODO
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
