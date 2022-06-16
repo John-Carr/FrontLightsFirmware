@@ -66,6 +66,8 @@ void Error_Handler(void);
 #define LED3_EN_GPIO_Port GPIOA
 #define Break_CS_Pin GPIO_PIN_3
 #define Break_CS_GPIO_Port GPIOA
+#define ADC_SDI_Pin GPIO_PIN_7
+#define ADC_SDI_GPIO_Port GPIOA
 #define Throttle_CS_Pin GPIO_PIN_4
 #define Throttle_CS_GPIO_Port GPIOC
 #define Board_Ok_Pin GPIO_PIN_5

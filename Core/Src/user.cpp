@@ -147,6 +147,10 @@ void ReadIMU()
 void ReadADC()
 {
   // TODO
+  // Read Break
+
+  // Read Throttle
+
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)

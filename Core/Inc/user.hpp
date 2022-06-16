@@ -9,8 +9,11 @@
 #include "CAN.hpp"
 #include "LED.hpp"
 #include "MPU6050.hpp"
+#include "FrontLightsController.hpp"
 
+// Datamodules
 SolarGators::DataModules::Steering LightsState;
+SolarGators::DataModules::FrontLightsController FLights;
 extern CAN_HandleTypeDef hcan;
 SolarGators::Drivers::CANDriver CANController(&hcan, 0);
 LSM6DSR_IO_t imu_bus =
@@ -28,7 +31,6 @@ LSM6DSR_Object_t imu;
 SolarGators::Drivers::fpoint_3d_t ACCEL;
 extern SPI_HandleTypeDef hspi1;
 
-uint8_t BREAK_VAL;
 // Throttle
 // TODO
 uint8_t THROTTLE_VAL;

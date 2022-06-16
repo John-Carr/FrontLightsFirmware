@@ -1,6 +1,0 @@
-ADCS747.cpp:13:1:SolarGators::Drivers::ADCS747::ADCS747(SPI_HandleTypeDef*, GPIO_TypeDef*, uint16_t)	24	static
-ADCS747.cpp:19:1:SolarGators::Drivers::ADCS747::~ADCS747()	16	static
-ADCS747.cpp:19:1:virtual SolarGators::Drivers::ADCS747::~ADCS747()	16	static
-ADCS747.cpp:23:6:void SolarGators::Drivers::ADCS747::Init()	16	static
-ADCS747.cpp:29:6:void SolarGators::Drivers::ADCS747::Read(uint8_t*)	16	static
-ADCS747.cpp:36:9:uint8_t SolarGators::Drivers::ADCS747::GetVoltage()	32	static
