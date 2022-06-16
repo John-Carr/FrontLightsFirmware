@@ -16,6 +16,9 @@ void SendCanMsgs();
 void ReadIMU();
 void ReadADC();
 
+// TEST VALUE
+uint16_t THROTTLEVAL = 0;
+
 // OS Configs
 osTimerId_t signal_timer_id;
 osTimerAttr_t signal_timer_attr =
@@ -87,6 +90,7 @@ void CPP_UserSetup(void)
   }
   CANController.Init();
 //  osTimerStart(can_tx_timer_id, 100);
+  throttle.Init();
 }
 
 void SendCanMsgs()
@@ -150,7 +154,7 @@ void ReadADC()
   // Read Break
 
   // Read Throttle
-
+  THROTTLE_VAL = throttle.Read();
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)

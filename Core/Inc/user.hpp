@@ -9,6 +9,7 @@
 #include "CAN.hpp"
 #include "LED.hpp"
 #include "MPU6050.hpp"
+#include "MCP33151.hpp"
 #include "FrontLightsController.hpp"
 
 // Datamodules
@@ -31,8 +32,8 @@ LSM6DSR_Object_t imu;
 SolarGators::Drivers::fpoint_3d_t ACCEL;
 extern SPI_HandleTypeDef hspi1;
 
-// Throttle
-// TODO
+// Throttle (Note: I messed up soldering and the throttle is soldered where I intended the break to go)
+SolarGators::Drivers::MCP33151 throttle(Break_CS_GPIO_Port, Break_CS_Pin, &hspi1);
 uint8_t THROTTLE_VAL;
 
 // Leds
