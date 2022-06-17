@@ -45,6 +45,7 @@ osTimerAttr_t can_tx_timer_attr =
 };
 void CPP_UserSetup(void)
 {
+  // Setup the CAN controller to receive lights state from the steering wheel
   CANController.AddRxModule(&LightsState);
   // Start Thread that Handles Turn Signal LEDs
   signal_timer_id = osTimerNew((osThreadFunc_t)UpdateSignals, osTimerPeriodic, NULL, &signal_timer_attr);
@@ -79,9 +80,9 @@ void CPP_UserSetup(void)
   {
       Error_Handler();
   }
-  // TODO: Initialize the ADC for throttle
-
-  osTimerStart(adc_timer_id, 500);
+  // Initialize the ADC for throttle
+  throttle.Init();
+  osTimerStart(adc_timer_id, 101);    // Needs to be >1x the rate we are sending
   // Start Thread that sends CAN Data
   can_tx_timer_id = osTimerNew((osThreadFunc_t)SendCanMsgs, osTimerPeriodic, NULL, &can_tx_timer_attr);
   if (can_tx_timer_id == NULL)
@@ -89,13 +90,13 @@ void CPP_UserSetup(void)
       Error_Handler();
   }
   CANController.Init();
-//  osTimerStart(can_tx_timer_id, 100);
+  osTimerStart(can_tx_timer_id, 100); // 10Hz we'll probably want to make this ~100Hz?
   throttle.Init();
 }
 
 void SendCanMsgs()
 {
-  CANController.Send(&LightsState);
+  CANController.Send(&FLights);
 }
 
 void UpdateSignals(void)
@@ -150,11 +151,9 @@ void ReadIMU()
 
 void ReadADC()
 {
-  // TODO
-  // Read Break
-
   // Read Throttle
-  THROTTLE_VAL = throttle.Read();
+  THROTTLE_VAL = throttle.Read(); // FOR DEBUG
+  FLights.SetThrottleVal(throttle.Read());
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
