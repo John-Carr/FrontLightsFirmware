@@ -34,7 +34,7 @@ extern SPI_HandleTypeDef hspi1;
 
 // Throttle (Note: I messed up soldering and the throttle is soldered where I intended the break to go)
 SolarGators::Drivers::MCP33151 throttle(Break_CS_GPIO_Port, Break_CS_Pin, &hspi1);
-uint8_t THROTTLE_VAL;
+uint16_t THROTTLE_VAL = 0;
 
 // Leds
 SolarGators::Drivers::LED lt_indicator    ("LT Indicator", LT_GPIO_Port, LT_GPIO_Pin);

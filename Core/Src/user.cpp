@@ -16,9 +16,6 @@ void SendCanMsgs();
 void ReadIMU();
 void ReadADC();
 
-// TEST VALUE
-uint16_t THROTTLEVAL = 0;
-
 // OS Configs
 osTimerId_t signal_timer_id;
 osTimerAttr_t signal_timer_attr =
