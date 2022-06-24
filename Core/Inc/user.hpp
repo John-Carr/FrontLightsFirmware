@@ -39,6 +39,7 @@ uint16_t THROTTLE_VAL = 0;
 // Leds
 SolarGators::Drivers::LED lt_indicator    ("LT Indicator", LT_GPIO_Port, LT_GPIO_Pin);
 SolarGators::Drivers::LED rt_indicator    ("RT Indicator", RT_GPIO_Port, RT_GPIO_Pin);
-SolarGators::Drivers::LED hl_indicator    ("HL Indicator", LED2_EN_GPIO_Port, LED2_EN_Pin);
+SolarGators::Drivers::LED hll_indicator    ("HLL Indicator", HLL_GPIO_Port, HLL_GPIO_Pin);
+SolarGators::Drivers::LED hlr_indicator    ("HLR Indicator", HLR_GPIO_Port, HLR_GPIO_Pin);
 
 #endif

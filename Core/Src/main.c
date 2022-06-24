@@ -340,13 +340,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : INT_IMU_Pin Aux_C1_Pin Aux_C2_Pin Aux_C3_Pin
-                           Aux_C4_Pin Aux_C5_Pin */
-  GPIO_InitStruct.Pin = INT_IMU_Pin|Aux_C1_Pin|Aux_C2_Pin|Aux_C3_Pin
-                          |Aux_C4_Pin|Aux_C5_Pin;
+  /*Configure GPIO pins : INT_IMU_Pin Aux_C2_Pin Aux_C3_Pin Aux_C4_Pin
+                           Aux_C5_Pin */
+  GPIO_InitStruct.Pin = INT_IMU_Pin|Aux_C2_Pin|Aux_C3_Pin|Aux_C4_Pin
+                          |Aux_C5_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : Throttle_Switch_Pin */
+  GPIO_InitStruct.Pin = Throttle_Switch_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(Throttle_Switch_GPIO_Port, &GPIO_InitStruct);
 
 }
 

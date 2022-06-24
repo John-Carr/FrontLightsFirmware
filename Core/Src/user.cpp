@@ -6,6 +6,11 @@
  */
 
 #include "user.hpp"
+#include "usbd_cdc_if.h"
+
+#include "etl/string.h"
+#include "etl/to_string.h"
+#include "etl/format_spec.h"
 
 using namespace SolarGators;
 
@@ -122,22 +127,22 @@ void UpdateSignals(void)
 
   if(!LightsState.GetHazardsStatus() && !LightsState.GetLeftTurnStatus())
     lt_indicator.TurnOff();
-  osMutexRelease(LightsState.mutex_id_);
-}
-
-// This is quick and dirty we could potentially add an event to the data module to block this until its updated
-void UpdateLights(void)
-{
-  while(1)
+  if (LightsState.GetHeadlightsStatus())
   {
-    osMutexAcquire(LightsState.mutex_id_, osWaitForever);
-    if (LightsState.GetHeadlightsStatus())
-      hl_indicator.TurnOn();
-    else
-      hl_indicator.TurnOff();
-    osMutexRelease(LightsState.mutex_id_);
-    osDelay(50);
+    hlr_indicator.TurnOn();
+    hll_indicator.TurnOn();
   }
+  else
+  {
+    hlr_indicator.TurnOff();
+    hll_indicator.TurnOff();
+  }
+  osMutexRelease(LightsState.mutex_id_);
+  // TODO: REMOVE ONLY FOR DEBUG
+//  etl::string<20> buff = "Throttle: ";
+//  etl::to_string(THROTTLE_VAL, buff, etl::format_spec().width(4).fill(0), true);
+//  buff.append("\r\n");
+//  CDC_Transmit_FS((uint8_t*)buff.c_str(), 18);
 }
 
 void ReadIMU()
@@ -149,8 +154,16 @@ void ReadIMU()
 void ReadADC()
 {
   // Read Throttle
-  THROTTLE_VAL = throttle.Read(); // FOR DEBUG
-  FLights.SetThrottleVal(throttle.Read());
+  // If the throttle is pressed
+  if(HAL_GPIO_ReadPin(Throttle_Switch_GPIO_Port, Throttle_Switch_Pin))
+  {
+    FLights.SetThrottleVal(0);
+  }
+  else
+  {
+    FLights.SetThrottleVal(throttle.Read());
+  }
+  THROTTLE_VAL = throttle.Read() >> 5; // FOR DEBUG
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
