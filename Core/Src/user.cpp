@@ -20,6 +20,7 @@ void UpdateSignals(void);
 void SendCanMsgs();
 void ReadIMU();
 void ReadADC();
+bool FaultPresent();
 
 // OS Configs
 osTimerId_t signal_timer_id;
@@ -84,7 +85,7 @@ void CPP_UserSetup(void)
   }
   // Initialize the ADC for throttle
   throttle.Init();
-  osTimerStart(adc_timer_id, 101);    // Needs to be >1x the rate we are sending
+  osTimerStart(adc_timer_id, 8);    // Needs to be >1x the rate we are sending
   // Start Thread that sends CAN Data
   can_tx_timer_id = osTimerNew((osThreadFunc_t)SendCanMsgs, osTimerPeriodic, NULL, &can_tx_timer_attr);
   if (can_tx_timer_id == NULL)
@@ -92,7 +93,7 @@ void CPP_UserSetup(void)
       Error_Handler();
   }
   CANController.Init();
-  osTimerStart(can_tx_timer_id, 100); // 10Hz we'll probably want to make this ~100Hz?
+  osTimerStart(can_tx_timer_id, 10); // 10Hz we'll probably want to make this ~100Hz?
   throttle.Init();
 }
 
@@ -137,6 +138,24 @@ void UpdateSignals(void)
     hlr_indicator.TurnOff();
     hll_indicator.TurnOff();
   }
+  if(FaultPresent())
+  {
+    fault_indicator.TurnOn();
+  }
+  else
+  {
+    fault_indicator.TurnOff();
+  }
+
+  if(LightsState.GetHornStatus())
+  {
+    horn.TurnOn();
+  }
+  else
+  {
+    horn.TurnOff();
+  }
+
   osMutexRelease(LightsState.mutex_id_);
   // TODO: REMOVE ONLY FOR DEBUG
 //  etl::string<20> buff = "Throttle: ";
@@ -170,4 +189,33 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
   CANController.SetRxFlag();
   HAL_CAN_DeactivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
+}
+
+bool FaultPresent()
+{
+  return
+    bmsCodes.isInternalCellCommunicationFault() |
+    bmsCodes.isCellBalancingStuckOffFault() |
+    bmsCodes.isWeakCellFault() |
+    bmsCodes.isLowCellVoltageFault() |
+    bmsCodes.isCellOpenWiringFault() |
+    bmsCodes.isCurrentSensorFault() |
+    bmsCodes.isCellVoltageOver5vFault() |
+    bmsCodes.isCellBankFault() |
+    bmsCodes.isWeakPackFault() |
+    bmsCodes.isFanMonitorFault() |
+//    bmsCodes.isThermistorFault() |
+    bmsCodes.isCanCommunicationFault() |
+    bmsCodes.isRedundantPowerSupplyFault() |
+    bmsCodes.isHighVoltageIsolationFault() |
+    bmsCodes.isInvalidInputSupplyVoltageFault() |
+    bmsCodes.isChargeenableRelayFault() |
+    bmsCodes.isDischargeenableRelayFault() |
+    bmsCodes.isChargerSafetyRelayFault() |
+    bmsCodes.isInternalHardwareFault() |
+    bmsCodes.isInternalHeatsinkThermistorFault() |
+    bmsCodes.isInternalLogicFault() |
+    bmsCodes.isHighestCellVoltageTooHighFault() |
+    bmsCodes.isLowestCellVoltageTooLowFault() |
+    bmsCodes.isPackTooHotFault();
 }

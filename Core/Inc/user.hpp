@@ -11,10 +11,14 @@
 #include "MPU6050.hpp"
 #include "MCP33151.hpp"
 #include "FrontLightsController.hpp"
+#include "OrionBMS.hpp"
+#include "DataModuleInfo.hpp"
 
 // Datamodules
 SolarGators::DataModules::Steering LightsState;
 SolarGators::DataModules::FrontLightsController FLights;
+SolarGators::DataModules::OrionBMSRx4 bmsCodes(SolarGators::DataModuleInfo::BMS_RX4_MSG_ID, 0);
+
 extern CAN_HandleTypeDef hcan;
 SolarGators::Drivers::CANDriver CANController(&hcan, 0);
 LSM6DSR_IO_t imu_bus =
@@ -41,5 +45,7 @@ SolarGators::Drivers::LED lt_indicator    ("LT Indicator", LT_GPIO_Port, LT_GPIO
 SolarGators::Drivers::LED rt_indicator    ("RT Indicator", RT_GPIO_Port, RT_GPIO_Pin);
 SolarGators::Drivers::LED hll_indicator    ("HLL Indicator", HLL_GPIO_Port, HLL_GPIO_Pin);
 SolarGators::Drivers::LED hlr_indicator    ("HLR Indicator", HLR_GPIO_Port, HLR_GPIO_Pin);
+SolarGators::Drivers::LED fault_indicator ("Fault Indicator", FI_GPIO_Port, FI_GPIO_Pin);
+SolarGators::Drivers::LED horn            ("Horn", HRN_GPIO_Port, HRN_GPIO_Pin);
 
 #endif
