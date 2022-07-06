@@ -215,7 +215,7 @@ bool FaultPresent()
     bmsCodes.isRedundantPowerSupplyFault() |
     bmsCodes.isHighVoltageIsolationFault() |
     bmsCodes.isInvalidInputSupplyVoltageFault() |
-    bmsCodes.isChargeenableRelayFault() |
+//    bmsCodes.isChargeenableRelayFault() |
     bmsCodes.isDischargeenableRelayFault() |
     bmsCodes.isChargerSafetyRelayFault() |
     bmsCodes.isInternalHardwareFault() |
