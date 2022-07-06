@@ -90,13 +90,13 @@ void Error_Handler(void);
 #define Aux_C3_GPIO_Port GPIOB
 #define Aux_C4_Pin GPIO_PIN_6
 #define Aux_C4_GPIO_Port GPIOB
-#define Aux_C5_Pin GPIO_PIN_7
-#define Aux_C5_GPIO_Port GPIOB
+#define Breaks_Pin GPIO_PIN_7
+#define Breaks_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 #define HLR_GPIO_Pin LED1_EN_Pin
 #define HLR_GPIO_Port LED1_EN_GPIO_Port
-#define HLL_GPIO_Pin LED4_EN_Pin
-#define HLL_GPIO_Port LED4_EN_GPIO_Port
+#define BRK_GPIO_Pin LED4_EN_Pin
+#define BRK_GPIO_Port LED4_EN_GPIO_Port
 #define LT_GPIO_Pin LED5_EN_Pin
 #define LT_GPIO_Port LED5_EN_GPIO_Port
 #define RT_GPIO_Pin LED2_EN_Pin

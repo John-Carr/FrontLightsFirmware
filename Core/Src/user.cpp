@@ -6,7 +6,6 @@
  */
 
 #include "user.hpp"
-#include "usbd_cdc_if.h"
 
 #include "etl/string.h"
 #include "etl/to_string.h"
@@ -50,6 +49,7 @@ void CPP_UserSetup(void)
 {
   // Setup the CAN controller to receive lights state from the steering wheel
   CANController.AddRxModule(&LightsState);
+  CANController.AddRxModule(&bmsCodes);
   // Start Thread that Handles Turn Signal LEDs
   signal_timer_id = osTimerNew((osThreadFunc_t)UpdateSignals, osTimerPeriodic, NULL, &signal_timer_attr);
   if (signal_timer_id == NULL)
@@ -105,6 +105,14 @@ void SendCanMsgs()
 void UpdateSignals(void)
 {
   osMutexAcquire(LightsState.mutex_id_, osWaitForever);
+  if(!HAL_GPIO_ReadPin(Breaks_GPIO_Port, Breaks_Pin))
+  {
+    HAL_GPIO_WritePin(BRK_GPIO_Port, BRK_GPIO_Pin, GPIO_PIN_SET);
+  }
+  else
+  {
+    HAL_GPIO_WritePin(BRK_GPIO_Port, BRK_GPIO_Pin, GPIO_PIN_RESET);
+  }
   if(LightsState.GetHazardsStatus())
   {
     if (lt_indicator.IsOn())
@@ -131,12 +139,10 @@ void UpdateSignals(void)
   if (LightsState.GetHeadlightsStatus())
   {
     hlr_indicator.TurnOn();
-    hll_indicator.TurnOn();
   }
   else
   {
     hlr_indicator.TurnOff();
-    hll_indicator.TurnOff();
   }
   if(FaultPresent())
   {
